@@ -121,7 +121,14 @@ class Grid
       cell_coordinates_with_inset(x, y, cell_size, inset)
 
     if colored && mode == :backgrounds
-      # TODO
+      color = background_color_for(cell)
+      if color
+        img.rect(x2, y2, x3, y3, color, color)
+        img.rect(x2, y1, x3, y2, color, color) if cell.linked?(cell.north)
+        img.rect(x2, y3, x3, y4, color, color) if cell.linked?(cell.south)
+        img.rect(x3, y2, x4, y3, color, color) if cell.linked?(cell.east)
+        img.rect(x1, y2, x2, y3, color, color) if cell.linked?(cell.west)
+      end
     else
       if cell.linked?(cell.north)
         img.line(x2, y1, x2, y2, wall)
@@ -217,5 +224,4 @@ class Grid
       cell.link(neighbor)
     end
   end
-
 end
