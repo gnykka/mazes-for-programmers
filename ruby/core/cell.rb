@@ -2,12 +2,14 @@ require 'core/distances'
 
 class Cell
   attr_reader :row, :column
+  attr_accessor :deleted
   attr_accessor :north, :south, :east, :west
 
   def initialize(row, column)
     @row = row
     @column = column
     @links = []
+    @deleted = false
   end
 
   def link(cell, bidi=true)
@@ -26,6 +28,10 @@ class Cell
 
   def linked?(cell)
     @links.include?(cell)
+  end
+
+  def deleted?
+    @deleted
   end
 
   def neighbors

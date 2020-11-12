@@ -60,15 +60,23 @@ class WeaveGrid < Grid
       end
 
       if cell.vertical_passage?
-        img.line(x2, y1, x2, y2, wall)
-        img.line(x3, y1, x3, y2, wall)
-        img.line(x2, y3, x2, y4, wall)
-        img.line(x3, y3, x3, y4, wall)
+        if !cell.north.deleted?
+          img.line(x2, y1, x2, y2, wall)
+          img.line(x3, y1, x3, y2, wall)
+        end
+        if !cell.south.deleted?
+          img.line(x2, y3, x2, y4, wall)
+          img.line(x3, y3, x3, y4, wall)
+        end
       else
-        img.line(x1, y2, x2, y2, wall)
-        img.line(x1, y3, x2, y3, wall)
-        img.line(x3, y2, x4, y2, wall)
-        img.line(x3, y3, x4, y3, wall)
+        if !cell.west.deleted?
+          img.line(x1, y2, x2, y2, wall)
+          img.line(x1, y3, x2, y3, wall)
+        end
+        if !cell.east.deleted?
+          img.line(x3, y2, x4, y2, wall)
+          img.line(x3, y3, x4, y3, wall)
+        end
       end
     end
   end

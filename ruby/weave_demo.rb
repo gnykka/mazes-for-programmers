@@ -7,7 +7,7 @@ RecursiveBacktracker.on(grid)
 filename = 'results/weave.png'
 grid.to_png(inset: 0.2).save(filename)
 
-grid.braid()
+grid.braid(sparse: true)
 
 filename = 'results/weave_weighted.png'
 grid.to_png(inset: 0.2).save(filename)
