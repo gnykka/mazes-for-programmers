@@ -1,3 +1,4 @@
+require 'chunky_png'
 require 'core/grid'
 require 'core/weave_cells'
 
@@ -48,8 +49,8 @@ class WeaveGrid < Grid
         end
       end
     else
-      if colored && mode == :backgrounds
-        color = background_color_for(cell)
+      if mode == :backgrounds
+        color = colored ? background_color_for(cell) : ChunkyPNG::Color::WHITE
         if color
           img.rect(x2, y1, x3, y2, color, color) if cell.linked?(cell.north)
           img.rect(x2, y3, x3, y4, color, color) if cell.linked?(cell.south)

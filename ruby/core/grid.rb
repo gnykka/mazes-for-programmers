@@ -120,8 +120,8 @@ class Grid
     x1, x2, x3, x4, y1, y2, y3, y4 =
       cell_coordinates_with_inset(x, y, cell_size, inset)
 
-    if colored && mode == :backgrounds
-      color = background_color_for(cell)
+    if mode == :backgrounds
+      color = colored ? background_color_for(cell) : ChunkyPNG::Color::WHITE
       if color
         img.rect(x2, y2, x3, y3, color, color)
         img.rect(x2, y1, x3, y2, color, color) if cell.linked?(cell.north)
@@ -181,7 +181,7 @@ class Grid
     img_height = cell_size * rows
     inset = (cell_size * inset).to_i
 
-    background = ChunkyPNG::Color::WHITE
+    background = inset > 0 && !colored ? ChunkyPNG::Color('lightskyblue') : ChunkyPNG::Color::WHITE
     wall = ChunkyPNG::Color::BLACK
 
     img = ChunkyPNG::Image.new(img_width + 1, img_height + 1, background)

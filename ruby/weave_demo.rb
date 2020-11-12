@@ -1,11 +1,13 @@
 require 'core/weave_grid'
 require 'algorithms/recursive_backtracker'
 
-grid = WeaveGrid.new(20, 20)
+grid = WeaveGrid.new(30, 60)
 RecursiveBacktracker.on(grid)
 
-start = grid[0, 0]
-grid.distances = start.distances
-
 filename = 'results/weave.png'
-grid.to_png(colored: true, inset: 0.2).save(filename)
+grid.to_png(inset: 0.2).save(filename)
+
+grid.braid()
+
+filename = 'results/weave_weighted.png'
+grid.to_png(inset: 0.2).save(filename)
